@@ -15,7 +15,6 @@ strong {
 }
 h2 {
     font-weight: bold;
-    font-size: 23px;
 }
 
 
@@ -35,13 +34,33 @@ header h1 {
 
  section{
     padding-top: 69px;
- }
- section h2{
-    font-size: 20px;
-    margin-top: 63px;
- }
+ } 
 
-<<<<<<< HEAD
+ section input {
+    width: 100%;
+    height: 46px;
+    border: 1px solid #d1d1d1;
+    border-radius: 5px;
+}
+
+section span {
+   margin-bottom: 14px;
+}
+
+section input.alert{
+   border: 3px solid red;
+}
+
+section input::placeholder {
+    font-size: 19px;
+    font-style: italic;
+    color: #bababa;
+}
+
+section.hidden-section{
+    display: none;
+}
+
 .hidden{
     display: none;
 }
@@ -62,32 +81,11 @@ header h1 {
     flex-direction: column;
     align-items: center;
 }
-=======
- section input {
-     width: 100%;
-     height: 46px;
-     border: 1px solid #d1d1d1;
-     border-radius: 5px;
- }
 
- section span {
-    margin-bottom: 14px;
- }
-
- section input.alert{
-    border: 3px solid red;
+.quizz.create h2{
+    font-size: 23px;
+    margin-top: 63px;
 }
- 
- section input::placeholder {
-     font-size: 19px;
-     font-style: italic;
-     color: #bababa;
- }
-
- section.hidden-section{
-     display: none;
- }
-
 .quizz.create button {
     margin-top: 35px;
     padding: 12px 35px;
@@ -105,4 +103,4 @@ header h1 {
      background-color: #ffffff;
      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
 }
->>>>>>> 5f2125c9fc51d1da1c63f8c1ef9ca384511a904b
+
