@@ -1,5 +1,6 @@
 body {
     font-family: 'Roboto', sans-serif;
+    background-color: #fafafa;
 }
 
 div, section, header{
@@ -26,11 +27,11 @@ header {
     height: 69px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
- header h1 {
+header h1 {
      font-size: 37px;
      color: white;
      font-weight: bold;
- }
+}
 
  section{
     padding-top: 69px;
@@ -39,3 +40,46 @@ header {
     font-size: 20px;
     margin-top: 63px;
  }
+
+ section input {
+     width: 100%;
+     height: 46px;
+     border: 1px solid #d1d1d1;
+     border-radius: 5px;
+ }
+
+ section span {
+    margin-bottom: 14px;
+ }
+
+ section input.alert{
+    border: 3px solid red;
+}
+ 
+ section input::placeholder {
+     font-size: 19px;
+     font-style: italic;
+     color: #bababa;
+ }
+
+ section.hidden-section{
+     display: none;
+ }
+
+.quizz.create button {
+    margin-top: 35px;
+    padding: 12px 35px;
+    background-color: #EC362D;
+    font-size: 21px;
+    color: white;
+    border: none;
+    border-radius: 15px;
+}
+
+.quizz.create.basic .container {
+     margin-top: 27px;
+     width: 600px;
+     padding: 21px 20px 24px 16px;
+     background-color: #ffffff;
+     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
+}

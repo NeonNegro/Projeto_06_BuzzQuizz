@@ -30,14 +30,21 @@
 
 
 
-    <section class="basic-quizz">
+    <section class="quizz create basic">
         <h2>Comece pelo começo</h2>
-        <div class="beginning">
-            <input type="text">
-            <input type="text">
-            <input type="text">
-            <input type="text">
+        <div class="container">
+            <input id ='title' type="text" placeholder="Título do seu quizz">
+            <span></span>
+            <input id ='url' type="text" placeholder="URL da imagem do seu quizz">
+            <span></span>
+            <input id ='qtd_questions' type="text" placeholder="Quantidade de perguntas do quizz">
+            <span></span>
+            <input id='qtd_levels' type="text" placeholder="Quantidade de níveis do quizz">
+            <span></span>
         </div>
+
+        <button onclick="validateBeginning()">Prosseguir pra criar perguntas</button>
+
     </section>
     </main>
     <script src="scripts/script.js"></script>
