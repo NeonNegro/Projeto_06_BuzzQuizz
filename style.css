@@ -39,3 +39,24 @@ header {
     font-size: 20px;
     margin-top: 63px;
  }
+
+.hidden{
+    display: none;
+}
+
+.quizz-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 146px auto 0px;
+    width: 1051px;
+}
+.emptyquizz-list {
+    background-color: #FAFAFA;
+    border-radius: 5px;
+    border: 1px #D4D4D4 dashed;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
