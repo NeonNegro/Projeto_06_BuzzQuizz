@@ -24,17 +24,31 @@
         <section class= "quizz-list">
             <div class="emptyquizz-list">
                 <span>Você não criou nenhum quizz ainda :(</span>
-                <div class="createquizz-button" onclick="">Criar Quizz ñ completado</div>
+                <div class="createquizz-button" onclick="">Criar Quizz</div>
             </div>
-            <div class="yourquizzes hidden">
-                <header>
+            <div class="yourquizzes-list hidden"> 
+                <div class="yourquizzes-header">
                     <h2>Seus Quizzes</h2>
-                    <ion-icon name="add-circle" onclick=""></ion-icon>
-                    <ul>Lista de seus quizzes</ul>
-                </header>
+                    <ion-icon name="add-circle" onclick=""></ion-icon>            
+                </div>               
+                <ul class="container-yourquizzes">
+                    <li class="yourquizz" onclick="openquizz(this)"></li>
+                    <li class="yourquizz" onclick="openquizz(this)"></li>
+                    <li class="yourquizz" onclick="openquizz(this)"></li>                    
+            </div>
             <div class="all-quizzes">
                 <h2>Todos os quizzes</h2>
-                <ul> lista de quizzes</ul>
+                <ul class="container-allquizzes" data-identifier="general-quizzes"> 
+                    <li class="othersquizz" onclick="openquizz(this)" data-identifier="quizz-card"> 
+                        <img src="http://i1.ytimg.com/vi/jHWKtQHXVJg/maxresdefault.jpg?feature=og" alt="continue">
+                        <p class="titlequizz">Quizz felino e um texto muito grande para testar</p>                                
+                    </li>
+                    <li class="othersquizz" onclick="openquizz(this)" ></li>
+                    <li class="othersquizz" onclick="openquizz(this)"></li>
+                    <li class="othersquizz" onclick="openquizz(this)"></li>
+                    <li class="othersquizz" onclick="openquizz(this)"></li>
+                    <li class="othersquizz" onclick="openquizz(this)"></li>
+                </ul>
             </div>
 
         </section>
@@ -63,7 +77,7 @@
 
     </section>
     </main>
-
+    <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
     <script src="scripts/script.js"></script>
 </body>
 </html>

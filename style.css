@@ -60,7 +60,7 @@ section.hidden-section{
     display: none;
 }
 
-.hidden{
+.quizz-list .hidden{
     display: none;
 }
 
@@ -68,18 +68,131 @@ section.hidden-section{
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 146px auto 0px;
-    width: 1051px;
+
+    margin: 0 auto 0;
+    padding-top: 146px;
+
+    width: 1051px;   
 }
 .emptyquizz-list {
+    width: 100%;
+    height: 181px;   
+
     background-color: #FAFAFA;
+
     border-radius: 5px;
     border: 1px #D4D4D4 dashed;
-    width: 100%;
+
     display: flex;
     flex-direction: column;
     align-items: center;
 }
+
+.emptyquizz-list span {
+    width: 250px;
+    display: flex;
+    text-align: center;
+  
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    color: #B9B9B9;
+
+    margin-top: 30px;
+}
+
+.createquizz-button {
+    border-radius: 50px;
+    border: 1px dashed #EC362D;   
+   
+    font-weight: 400;
+    font-size: 21px;
+    color: #EC362D;
+
+    padding: 8px 24px;
+    margin: 31px auto;
+    cursor: pointer;
+}
+
+.yourquizzes-list {
+    width: 100%;    
+}
+
+.yourquizzes-header{
+    width: 100%;
+    flex-direction: row;
+    justify-content: left;    
+}
+.yourquizzes-header h2, .all-quizzes h2{
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 23px;
+
+    display: flex;
+    align-items: center;
+    text-align: center;
+    padding-right: 17px;
+}
+
+.yourquizzes-header ion-icon{
+    color: red;
+    font-size: 30px;
+}
+.container-yourquizzes, .container-allquizzes{    
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    
+}
+.container-yourquizzes .yourquizz, .container-allquizzes .othersquizz {
+    width: 340px;
+    height: 181px;   
+
+    margin: 15px 10px 15px 0;
+
+    position: relative;
+       
+}
+ 
+    
+.yourquizz img, .othersquizz img{ 
+    background: rgb(0,0,0);
+    background: linear-gradient(180deg, rgba(0,0,0,1) 33%, rgba(133,133,133,1) 67%, rgba(255,255,255,1) 100%);
+    border-radius: 5px;   
+    width: 340px;
+    height: 181px;       
+}
+
+.yourquizz p, .othersquizz p{
+    height: 54px;
+
+    font-style: normal;
+    font-weight: normal;
+    font-size: 19px;
+    line-height: 22px;
+    color: #FFFFFF;
+
+    position: absolute;
+    bottom: 10px;
+    z-index: 1;
+    
+    margin: 0 20px 0;
+    display: flex;    
+    align-items: center;
+}
+
+.all-quizzes {
+    width: 100%;
+    margin: 48px 0px;
+}
+
+.all-quizzes h2{
+    width: 100%;
+    flex-direction: row;
+    justify-content: left;      
+}
+
  section input {
      width: 100%;
      height: 46px;
