@@ -24,7 +24,7 @@
         <section class= "quizz-list">
             <div class="emptyquizz-list">
                 <span>Você não criou nenhum quizz ainda :(</span>
-                <div class="createquizz-button" onclick="">Criar Quizz</div>
+                <div class="createquizz-button" onclick="screenTransition.quizzlistToBeginning()">Criar Quizz</div>
             </div>
             <div class="yourquizzes-list hidden"> 
                 <div class="yourquizzes-header">
@@ -60,20 +60,57 @@
 
 
 
-    <section class="quizz create basic">
+    <section class="quizz create basic hidden-section">
         <h2>Comece pelo começo</h2>
         <div class="container">
-            <input id ='title' type="text" placeholder="Título do seu quizz">
+            <!-- <input id ='title' type="text" placeholder="Título do seu quizz">  -->
+            <input id ='title' type="text" placeholder="Título do seu quizz" value='https://trello.com/b/TmeKrp4E/buzzquizzscreenTransition'> 
             <span></span>
-            <input id ='url' type="text" placeholder="URL da imagem do seu quizz">
+            <!-- <input id ='url' type="text" placeholder="URL da imagem do seu quizz"> -->
+            <input id ='url' type="text" placeholder="URL da imagem do seu quizz" value='https://trello.com/b/TmeKrp4E/buzzquizzscreenTransition'>
             <span></span>
-            <input id ='qtd_questions' type="text" placeholder="Quantidade de perguntas do quizz">
+            <!-- <input id ='qtd_questions' type="text" placeholder="Quantidade de perguntas do quizz"> -->
+            <input id ='qtd_questions' type="text" placeholder="Quantidade de perguntas do quizz" value='4'>
             <span></span>
-            <input id='qtd_levels' type="text" placeholder="Quantidade de níveis do quizz">
+            <!-- <input id='qtd_levels' type="text" placeholder="Quantidade de níveis do quizz"> -->
+            <input id='qtd_levels' type="text" placeholder="Quantidade de níveis do quizz" value='4'>
             <span></span>
         </div>
 
-        <button onclick="validateBeginning()">Prosseguir pra criar perguntas</button>
+        <button onclick="validate.beginning()">Prosseguir pra criar perguntas</button>
+
+    </section>
+    <section class="quizz create questions hidden-section">
+        <h2>Crie suas perguntas</h2>
+        <div class="container">
+            <h3> Pergunta 1 </h3>
+            <input id ='question-1' type="text" placeholder="Texto da Pergunta">
+            <span></span>
+            <input id ='color-1' type="text" placeholder="Cor de fundo da pergunta">
+            <span></span>
+            <h3> Resposta correta </h3>
+            <input id ='answer-1' type="text" placeholder="Resposta correta">
+            <span></span>
+            <input id='img-1' type="text" placeholder="URL da imagem">
+            <span></span>
+            <h3> Respostas incorretas </h3>
+            <input id='incorrect-1-1' type="text" placeholder="Resposta incorreta 1">
+            <span></span>
+            <input id='incorrectUrl-1-1' type="text" placeholder="URL da imagem 1">
+            <span></span>
+            <span class="break"></span>
+            <input id='incorrect-1-2' type="text" placeholder="Resposta incorreta 2">
+            <span></span>
+            <input id='incorrectUrl-1-2' type="text" placeholder="URL da imagem 2">
+            <span></span>
+            <span class="break"></span>
+            <input id='incorrect-1-3' type="text" placeholder="Resposta incorreta 3">
+            <span></span>
+            <input id='incorrectUrl-1-3' type="text" placeholder="URL da imagem 3">
+            <span></span>
+        </div>
+
+        <button onclick="validateQuestions()">Prosseguir pra criar níveis</button>
 
     </section>
     </main>

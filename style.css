@@ -193,19 +193,13 @@ section.hidden-section{
     justify-content: left;      
 }
 
- section input {
-     width: 100%;
-     height: 46px;
-     border: 1px solid #d1d1d1;
-     border-radius: 5px;
- }
-
 .quizz.create h2{
     font-size: 23px;
     margin-top: 63px;
 }
 .quizz.create button {
     margin-top: 35px;
+    margin-bottom: 35px;
     padding: 12px 35px;
     background-color: #EC362D;
     font-size: 21px;
@@ -213,11 +207,21 @@ section.hidden-section{
     border: none;
     border-radius: 15px;
 }
-.quizz.create.basic .container {
+.quizz.create .container {
      margin-top: 27px;
      width: 600px;
      padding: 21px 20px 24px 16px;
      background-color: #ffffff;
      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
+}
+.quizz.create h3 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-right: auto;
+    padding: 0px 0px 12px 0px;
+}
+
+.quizz.create h3:not(:first-child){
+    margin-top: 14px;
 }
 

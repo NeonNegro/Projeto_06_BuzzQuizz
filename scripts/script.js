@@ -12,32 +12,35 @@ const msgsErrors = {
     qtd_levels : {msg : 'no mínimo 2 níveis', field : '#qtd_levels'}
 }
 
-function validateBeginning (){
-    let quizz = quizzBeginning;
-    let errors = [];
-    const fields = document.querySelectorAll('.quizz.create.basic .container input');
 
-    if(fields[0].value.length >= 20 && fields[0].value.length <= 65 )
-        quizz.title = fields[0].value;
-    else
-        errors.push( msgsErrors.title);
-    if(isValidURL(fields[1].value))
-        quizz.url = fields[1].value;
-    else
-        errors.push(msgsErrors.url);
-    if(parseInt(fields[2].value) >= 3)
-        quizz.qtd_questions = parseInt(fields[2].value);
-    else
-        errors.push(msgsErrors.qtd_questions);
-    if(parseInt(fields[3].value) >= 2)
-        quizz.qtd_levels = fields[3].value;
-    else
-        errors.push(msgsErrors.qtd_levels);
-
-    if(errors === [])
-        beginningToQuestions()
-    else
-        showError(errors)
+const validate = {
+    beginning: function(){
+        let quizz = quizzBeginning;
+        let errors = [];
+        const fields = document.querySelectorAll('.quizz.create.basic .container input');
+    
+        if(fields[0].value.length >= 20 && fields[0].value.length <= 65 )
+            quizz.title = fields[0].value;
+        else
+            errors.push( msgsErrors.title);
+        if(isValidURL(fields[1].value))
+            quizz.url = fields[1].value;
+        else
+            errors.push(msgsErrors.url);
+        if(parseInt(fields[2].value) >= 3)
+            quizz.qtd_questions = parseInt(fields[2].value);
+        else
+            errors.push(msgsErrors.qtd_questions);
+        if(parseInt(fields[3].value) >= 2)
+            quizz.qtd_levels = fields[3].value;
+        else
+            errors.push(msgsErrors.qtd_levels);
+    
+        if(errors.length === 0)
+            screenTransition.beginningToQuestions()
+        else
+            showError(errors)
+    }
 }
 
 function showError(errors){
@@ -50,7 +53,8 @@ function showError(errors){
     });
     
 }
-function isValidURL(url){
+function isValidURL(string){
+    let url;
     try {
         url = new URL(string);
       } catch (_) {
@@ -59,7 +63,16 @@ function isValidURL(url){
     return true;
 }
 
-function beginningToQuestions(){
-    document.querySelector('.quizz.create.basic').classList.toggle('hidden-section');
-    document.querySelector('.quizz.create.questions').classList.toggle('hidden-section');
+
+
+
+const screenTransition = {
+    quizzlistToBeginning: function (){
+        document.querySelector('.quizz-list').classList.toggle('hidden-section');
+        document.querySelector('.quizz.create.basic').classList.toggle('hidden-section');
+    },
+    beginningToQuestions: function(){
+        document.querySelector('.quizz.create.basic').classList.toggle('hidden-section');
+        document.querySelector('.quizz.create.questions').classList.toggle('hidden-section');
+    }
 }
