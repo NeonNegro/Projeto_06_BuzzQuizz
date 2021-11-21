@@ -21,7 +21,7 @@
         <h1>BuzzQuizz</h1>
     </header>
     <main>
-        <section class= "quizz-list hidden-section">
+        <section class= "quizz-list">
             <div class="emptyquizz-list">
                 <span>Você não criou nenhum quizz ainda :(</span>
                 <div class="createquizz-button" onclick="screenTransition.quizzlistToBeginning()">Criar Quizz</div>
@@ -29,30 +29,21 @@
             <div class="yourquizzes-list hidden"> 
                 <div class="yourquizzes-header">
                     <h2>Seus Quizzes</h2>
-                    <ion-icon name="add-circle" onclick=""></ion-icon>            
+                    <ion-icon name="add-circle" onclick="screenTransition.quizzlistToBeginning()"></ion-icon>            
                 </div>               
                 <ul class="container-yourquizzes">
-                    <li class="yourquizz" onclick="openquizz(this)"></li>
-                    <li class="yourquizz" onclick="openquizz(this)"></li>
-                    <li class="yourquizz" onclick="openquizz(this)"></li>                    
+                    
+                </ul>                   
             </div>
             <div class="all-quizzes">
                 <h2>Todos os quizzes</h2>
                 <ul class="container-allquizzes" data-identifier="general-quizzes"> 
-                    <li class="othersquizz" onclick="openquizz(this)" data-identifier="quizz-card"> 
-                        <img src="http://i1.ytimg.com/vi/jHWKtQHXVJg/maxresdefault.jpg?feature=og" alt="continue">
-                        <p class="titlequizz">Quizz felino e um texto muito grande para testar</p>                                
-                    </li>
-                    <li class="othersquizz" onclick="openquizz(this)" ></li>
-                    <li class="othersquizz" onclick="openquizz(this)"></li>
-                    <li class="othersquizz" onclick="openquizz(this)"></li>
-                    <li class="othersquizz" onclick="openquizz(this)"></li>
-                    <li class="othersquizz" onclick="openquizz(this)"></li>
+                    
                 </ul>
             </div>
 
         </section>
-        <section class="quizz-page">
+        <section class="quizz-page hidden-section">
             <div class="quizz-banner">
                 <img class="banner-image" src="">
                 <div class="shadow"></div>
@@ -126,6 +117,8 @@
 
     </section>
     </main>
+    
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
     <script src="scripts/script.js"></script>
 </body>

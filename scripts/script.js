@@ -76,3 +76,71 @@ const screenTransition = {
         document.querySelector('.quizz.create.questions').classList.toggle('hidden-section');
     }
 }
+
+
+
+
+
+
+
+
+
+
+const url_quizzes = `https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes`;
+const homeScreen = document.querySelector(".quizz-list");
+let activeUserQuizzes;
+
+function getServerQuizzes() {
+    const promise = axios.get(url_quizzes);
+    promise.then(printHomeScreen);    
+}
+
+function printHomeScreen(answer) { 
+   
+    printHomeScreenThumbs(answer.data,"all-quizzes");
+    checkUserQuizzes(answer.data);
+}
+
+function printHomeScreenThumbs(quizzes,locationClass) {
+    let text = "";    
+    for(i = 0; i < quizzes.length; i++) {      
+        text += thumbStructure(quizzes[i]);
+    }
+    homeScreen.querySelector(`.${locationClass} ul`).innerHTML = text;
+}
+
+function checkUserQuizzes(serverQuizzes) {
+    const userIds = getUserQuizzes().ids;
+    const userKeys = getUserQuizzes().keys;
+    activeUserQuizzes = serverQuizzes.filter(({id}) => userIds.includes(id))
+    if (activeUserQuizzes.length === 0) {
+        homeScreen.querySelector(".emptyquizz-list").classList.remove("hidden");
+        homeScreen.querySelector(".yourquizzes-list").classList.add("hidden");
+    } else {
+        homeScreen.querySelector(".emptyquizz-list").classList.add("hidden");
+        homeScreen.querySelector(".yourquizzes-list").classList.remove("hidden");
+        printHomeScreenThumbs(activeUserQuizzes,"yourquizzes-list",userKeys);
+    }
+}
+
+function getUserQuizzes() {
+    let userInfo;
+    if (localStorage.getItem("idBuzzQuizzArray")){
+        userInfo = JSON.parse(localStorage.getItem("idBuzzQuizzArray"))
+    } else {
+        userInfo = {ids:[],keys:[]}
+        localStorage.setItem("idBuzzQuizzArray",JSON.stringify(userInfo));
+    }
+    return userInfo
+}
+
+function thumbStructure(element) {
+    return `<li class="quizz-thumb" onclick="openquizz(${element.id})" data-identifier="quizz-card">
+                <div class="thumb grad"></div>
+                <img src="${element.image}" alt="imagem">
+                <h2 class="quizz-thumb-title">${element.title}</h2>
+                
+            </li>`;
+}
+
+getServerQuizzes();
