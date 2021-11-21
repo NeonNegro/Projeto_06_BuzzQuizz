@@ -63,6 +63,8 @@ function isValidURL(string){
     return true;
 }
 
+<img onclick="addNewQuestion(this) "src="imgs/new-question.png" alt=""></img>
+
 
 
 
