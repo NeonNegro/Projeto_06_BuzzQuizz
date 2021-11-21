@@ -21,7 +21,7 @@
         <h1>BuzzQuizz</h1>
     </header>
     <main>
-        <section class= "quizz-list">
+        <section class= "quizz-list hidden-section">
             <div class="emptyquizz-list">
                 <span>Você não criou nenhum quizz ainda :(</span>
                 <div class="createquizz-button" onclick="screenTransition.quizzlistToBeginning()">Criar Quizz</div>
@@ -52,7 +52,19 @@
             </div>
 
         </section>
-
+        <section class="quizz-page">
+            <div class="quizz-banner">
+                <img class="banner-image" src="">
+                <div class="shadow"></div>
+                <span class="quizz-title"></span>
+            </div>
+            <div class="quizz-questions">
+            </div>
+            <div class="result hidden">
+            </div>
+            <button class="restart-button" onclick="clearQuizz()">Reiniciar Quizz</button>
+            <button class="home-button" onclick="switchPage('quizz-list')">Voltar pra home</button>
+        </section>
 
 
 
