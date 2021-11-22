@@ -609,7 +609,7 @@ function switchPage(pageTo) {
     playQuizzScreen.classList.add("hidden-section");
     homeScreen.classList.add("hidden-section");
     if (pageTo === "quizz-list") {
-        getServerQuizzes()
+        getServerQuizzes();
     }
     document.querySelector(`.${pageTo}`).classList.remove("hidden-section");
 }
@@ -652,7 +652,27 @@ function scrollToNextQuestion(question) {
     }
 }
 
-function showResults(questionsNumber){
-    return questionsNumber;
+// resultados 
+
+function showResults(questionsNumber){    
+
+    const score = Math.round((currentQuizzInfo.rightAnswers / questionsNumber) * 100);
+    let level = 0;
+    for (let i = 0; i < currentQuizzInfo.levels.length; i++) {
+        if (score >= currentQuizzInfo.levels[i].minValue) {
+            level = i;
+        }
+    }
+    const result = playQuizzScreen.querySelector(".result");
+    result.innerHTML = `
+            <div class="score">${score}% de acerto: ${currentQuizzInfo.levels[level].title}</div>
+            <div class="description">
+                <img src="${currentQuizzInfo.levels[level].image}" alt="resultado">
+                <p>${currentQuizzInfo.levels[level].text}</p>
+            </div>`;
+    result.classList.remove("hidden");
+    result.scrollIntoView();
 }
+
+
 getServerQuizzes();
