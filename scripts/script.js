@@ -452,7 +452,7 @@ function soPraTestarApagar(){
 
 
 
-
+//tela 1
 const url_quizzes = `https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes`;
 const homeScreen = document.querySelector(".quizz-list");
 let activeUserQuizzes;
@@ -468,10 +468,21 @@ function printHomeScreen(answer) {
     checkUserQuizzes(answer.data);
 }
 
-function printHomeScreenThumbs(quizzes,locationClass) {
-    let text = "";    
-    for(i = 0; i < quizzes.length; i++) {      
-        text += thumbStructure(quizzes[i]);
+function printHomeScreenThumbs(quizzes,locationClass,userKeys) {
+    let text = "";
+    let buttonsString = "";    
+    for(i = 0; i < quizzes.length; i++) {
+        if (locationClass === "yourquizzes-list"){
+            buttonsString = `
+            <button class="your-quizzes-options edit-option" onclick="editUserQuizz(${quizzes[i].id},'${userKeys[i]}')">
+                
+            </button>
+            <button class="your-quizzes-options delete-option" onclick="deleteUserQuizz(${quizzes[i].id},'${userKeys[i]}')">
+               
+            </button>
+            `;
+        }      
+        text += thumbStructure(quizzes[i],buttonsString);
     }
     homeScreen.querySelector(`.${locationClass} ul`).innerHTML = text;
 }
@@ -501,13 +512,147 @@ function getUserQuizzes() {
     return userInfo
 }
 
-function thumbStructure(element) {
-    return `<li class="quizz-thumb" onclick="openquizz(${element.id})" data-identifier="quizz-card">
-                <div class="thumb grad"></div>
-                <img src="${element.image}" alt="imagem">
-                <h2 class="quizz-thumb-title">${element.title}</h2>
-                
-            </li>`;
+function thumbStructure(element,buttonsString) {
+        return `<li class="quizz-thumb" onclick="playQuizz(${element.id})" data-identifier="quizz-card">
+        <div class="thumb grad"></div>
+        <img src="${element.image}" alt="Test Image">
+        <h2 class="quizz-thumb-title">${element.title}</h2>
+        ${buttonsString}
+        </li>`;
 }
 
+//tela 2
+
+const playQuizzScreen = document.querySelector(".quizz-page");
+const newQuizzScreen = document.querySelector(".quizz.create");
+const currentQuizzInfo = {
+    questionsAnswered: 0,
+    levels: [],
+    rightAnswers: 0
+};
+
+function playQuizz(quizzID) {
+    const promise = axios.get(`${url_quizzes}/${quizzID}`);
+    promise.then(printQuizz);
+  
+}
+
+function printQuizz(quizz){
+    const title = playQuizzScreen.querySelector(".quizz-title");
+    title.innerText = quizz.data.title;
+    const banner = playQuizzScreen.querySelector(".banner-image");
+    banner.src = quizz.data.image;
+    const questions = playQuizzScreen.querySelector(".quizz-questions");
+
+    questions.innerHTML = "";
+    currentQuizzInfo.levels = quizz.data.levels;
+    for (let i = 0; i < quizz.data.questions.length; i++) {
+        let randomAnswers = quizz.data.questions[i].answers.sort(randomize);
+        let answers = "";
+        for (let j = 0; j < randomAnswers.length; j++) {
+            answers += 
+            `<li class="option" onclick="selectAnswer(this)">
+                <img src="${randomAnswers[j].image}" alt="Option Imagem">
+                <span>${randomAnswers[j].text}</span>
+                <span class="value hidden">${randomAnswers[j].isCorrectAnswer}</span>
+            </li>`;
+        }
+        if (quizz.data.questions[i].color.toLowerCase() === "#ffffff") {
+            questions.innerHTML += 
+            `<div class="question">
+                <div class="question-title black" style="background-color:${quizz.data.questions[i].color}">
+                <span>${quizz.data.questions[i].title}</span>
+                </div>
+                <ul class="answers">
+                    ${answers}
+                </ul>
+            </div>`;
+        } else {
+            questions.innerHTML += 
+            `<div class="question">
+                <div class="question-title" style="background-color:${quizz.data.questions[i].color}">${quizz.data.questions[i].title}</div>
+                <ul class="answers">
+                    ${answers}
+                </ul>
+            </div>`;
+        }
+    } 
+    clearQuizz();
+    switchPage("quizz-page");
+
+}
+
+function randomize() { 
+	return Math.random() - 0.5; 
+}
+
+function clearClass(className) {
+    const group = document.querySelectorAll(`.${className}`);
+    for (let i = 0; i < group.length; i++) {
+        group[i].classList.remove(`${className}`);
+    }
+}
+
+function clearQuizz() {
+    currentQuizzInfo.questionsAnswered = 0;
+    currentQuizzInfo.rightAnswers = 0;
+    clearClass("not-selected");
+    clearClass("correct");
+    clearClass("wrong");
+    const result = playQuizzScreen.querySelector(".result");
+    result.classList.add("hidden");
+    window.scrollTo(0, 0);
+}
+
+function switchPage(pageTo) {
+    newQuizzScreen.classList.add("hidden-section");
+    playQuizzScreen.classList.add("hidden-section");
+    homeScreen.classList.add("hidden-section");
+    if (pageTo === "quizz-list") {
+        getServerQuizzes()
+    }
+    document.querySelector(`.${pageTo}`).classList.remove("hidden-section");
+}
+
+// comportamento de respostas
+
+function selectAnswer(answer) {
+    const question = answer.parentNode;
+    const isAnswered = question.querySelector(".not-selected");
+    if (isAnswered === null) {
+        const answers = question.children;
+        for (let i = 0; i < answers.length; i++) {
+            answers[i].classList.add("not-selected");
+            let value = answers[i].querySelector(".value").innerText;
+            if (value === "true") {
+                answers[i].classList.add("correct")
+            } else {
+                answers[i].classList.add("wrong") 
+            }
+        }
+        if (answer.querySelector(".value").innerText === "true") {
+            currentQuizzInfo.rightAnswers++;
+        }
+        answer.classList.remove("not-selected");
+        setTimeout(scrollToNextQuestion, 2000, question.parentNode);
+        currentQuizzInfo.questionsAnswered++;
+        const questionsNumber = playQuizzScreen.querySelectorAll(".question").length;
+        if (currentQuizzInfo.questionsAnswered === questionsNumber) {
+            setTimeout(showResults, 2000, questionsNumber);
+        }    
+    }
+}
+
+function scrollToNextQuestion(question) {
+    questions = playQuizzScreen.querySelectorAll(".question");
+    for (let i = 0; i < questions.length; i++) {
+        if ((question === questions[i]) && (i + 1 < questions.length)) {
+            questions[i + 1].scrollIntoView();
+        }
+    }
+}
+
+function showResults(questionsNumber){
+    return questionsNumber;
+}
 getServerQuizzes();
