@@ -383,7 +383,7 @@ const conexion = {
             let d = response.data;
             quizz = {...emptyQuizz};
             console.log(response);
-            prepareScreen.sucess(d.title, d.image);
+            prepareScreen.sucess(d.id, d.title, d.image);
             //modificação para obter ID e Key
             dataUserQuizz.id.push(response.data.id); 
             dataUserQuizz.key.push(response.data.key);
