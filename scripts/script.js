@@ -320,6 +320,7 @@ const screenTransition = {
     },
     sucessToHome: function (response){
         document.querySelector('.quizz.create.sucess').classList.toggle('hidden-section');
+        document.querySelector('.quizz-list').classList.toggle('hidden-section');
         prepareScreen.home(response);
     }
 }
@@ -380,8 +381,10 @@ const prepareScreen = {
         let container_html = parent.querySelector('.img-container');
         let img_html = parent.querySelector('img'); 
         let title_html = parent.querySelector('.quizz-title'); 
+        let button_html = parent.querySelector('button'); 
 
         container_html.setAttribute("onclick",`conexion.getQuizz(${id})`);
+        button_html.setAttribute("onclick",`conexion.getQuizz(${id})`);
         img_html.src = imgURL;
         title_html.innerText = title;
     },
