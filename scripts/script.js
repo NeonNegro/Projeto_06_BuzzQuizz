@@ -28,6 +28,26 @@ let dataUserQuizz = {
     key: []
 }
 
+const utils = {
+    clearScreen: function(field){
+        let inputs = document.querySelectorAll(`${field} input`);
+        let spans = document.querySelectorAll(`${field} .container span, ${field} span.quizz-title `);
+        let imgs = document.querySelectorAll(`${field} .img-container img`);
+        inputs.forEach(e => {
+            e.classList.remove('alert');
+            e.value = '';
+            e.nextElementSibling.innerText = '';
+        });
+        spans.forEach(e => {
+            e.innerText = '';
+        });
+        imgs.forEach(e => {
+            e.src= 'imgs/img_not_found.png';
+        });
+    }
+}
+
+
 const msgsErrors = {
     title : {msg : 'deve ter no mínimo 20 e no máximo 65 caracteres', field : '#title'},
     url :{msg : 'deve ter formato URL', field : '#url'},
@@ -250,7 +270,7 @@ const validate = {
 
         if(levels.length >= 2 && minPercentOk !== undefined){
             quizz.levels = levels;
-            screenTransition.questionsToSucess();
+            screenTransition.levelsToSucess();
             console.log('sucesso');
         }
         else
@@ -301,26 +321,31 @@ const screenTransition = {
     beginningToQuestions: function(){
         document.querySelector('.quizz.create.basic').classList.toggle('hidden-section');
         document.querySelector('.quizz.create.questions').classList.toggle('hidden-section');
+        clearScreen.beginning();
         prepareScreen.questions();
     },
     questionsToLevels: function() {
         document.querySelector('.quizz.create.questions').classList.toggle('hidden-section');
         document.querySelector('.quizz.create.levels').classList.toggle('hidden-section');
+        clearScreen.questions();
         prepareScreen.levels();
     },
-    questionsToSucess: function(){
+    levelsToSucess: function(){
         document.querySelector('.quizz.create.levels').classList.toggle('hidden-section');
         document.querySelector('.quizz.create.sucess').classList.toggle('hidden-section');
+        clearScreen.levels();
         conexion.sendMadeQuizz();
     },
     sucessToNewQuizz: function(quizz){
         document.querySelector('.quizz.create.sucess').classList.toggle('hidden-section');
         document.querySelector('.quizz-page').classList.toggle('hidden-section');
+        clearScreen.sucess();
         prepareScreen.quizz_page(quizz);
     },
     sucessToHome: function (response){
         document.querySelector('.quizz.create.sucess').classList.toggle('hidden-section');
         document.querySelector('.quizz-list').classList.toggle('hidden-section');
+        clearScreen.sucess();
         prepareScreen.home(response);
     }
 }
@@ -396,6 +421,13 @@ const prepareScreen = {
     }
 }
 
+const clearScreen = {
+    beginning: function (){ utils.clearScreen('.quizz.create.basic')},
+    questions: function (){ utils.clearScreen('.quizz.create.questions')},
+    levels: function (){ utils.clearScreen('.quizz.create.levels')},
+    sucess: function() {utils.clearScreen('.quizz.create.sucess')}
+}
+
 
 const conexion = {
     getQuizzes: function (){
@@ -439,6 +471,7 @@ function login(){
 }
 
 function soPraTestarApagar(){
+    if(true)return;
     let tela;
     let inputs= [];
     let input;
@@ -490,6 +523,7 @@ function soPraTestarApagar(){
         // <input id='level-description-1' type="text" placeholder="Descrição do nível">
     }
 }
+
 
 
 
