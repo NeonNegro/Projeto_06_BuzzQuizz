@@ -653,6 +653,7 @@ function clearQuizz() {
 
 function switchPage(pageTo) {
     homeScreen.classList.add("hidden-section");
+    playQuizzScreen.classList.add("hidden-section");
     if (pageTo === "quizz-list") {
         getServerQuizzes();
     }
