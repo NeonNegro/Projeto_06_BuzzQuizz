@@ -571,22 +571,22 @@ function printHomeScreenThumbs(quizzes,locationClass/*,userKeys*/) {
 function checkUserQuizzes(serverQuizzes) {
     console.log(serverQuizzes);
     const userIds = getUserQuizzes().ids;
-    userIds[0] =1469;
+    //userIds[0] =1469;
     console.log(userIds);
 
-    const userKeys = getUserQuizzes().keys;   
-    userKeys[0] = "362067b1-7129-4dfe-92c0-ca1cf98e63d0";    
+   /* const userKeys = getUserQuizzes().keys;   
+    userKeys[0] = "362067b1-7129-4dfe-92c0-ca1cf98e63d0"; */    
     
     activeUserQuizzes = serverQuizzes.filter(({id}) => userIds.includes(id));
-
     console.log(activeUserQuizzes);
+    
     if (activeUserQuizzes.length == 0) {
         homeScreen.querySelector(".emptyquizz-list").classList.remove("hidden");
         homeScreen.querySelector(".yourquizzes-list").classList.add("hidden");
     } else {
         homeScreen.querySelector(".emptyquizz-list").classList.add("hidden");
         homeScreen.querySelector(".yourquizzes-list").classList.remove("hidden");
-        printHomeScreenThumbs(activeUserQuizzes,"yourquizzes-list",userKeys);
+        printHomeScreenThumbs(activeUserQuizzes,"yourquizzes-list" /*,userKeys*/);
     }
 }
 
