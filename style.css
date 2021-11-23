@@ -494,6 +494,9 @@ section.hidden-section{
     margin-top: 45px;
     border-radius: 5px;
 }
+.quizz.create.sucess .img-container{
+    cursor: pointer;
+}
 .quizz.create.sucess .quizz-title {
     position: absolute;
     bottom: 0;
@@ -502,10 +505,7 @@ section.hidden-section{
     font-weight: 400;
     font-size: 23px;
     color: #FFFFFF;
-    /* overflow-wrap: break-word; */
-    /* overflow: hidden; */
     word-break: break-word;
-    /* text-overflow: ellipsis; */
     white-space: break-spaces;
 }
 .quizz.create.sucess img {

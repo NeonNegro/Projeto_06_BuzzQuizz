@@ -312,10 +312,25 @@ const screenTransition = {
         document.querySelector('.quizz.create.levels').classList.toggle('hidden-section');
         document.querySelector('.quizz.create.sucess').classList.toggle('hidden-section');
         conexion.sendMadeQuizz();
+    },
+    sucessToNewQuizz: function(quizz){
+        document.querySelector('.quizz.create.sucess').classList.toggle('hidden-section');
+        document.querySelector('.quizz-page').classList.toggle('hidden-section');
+        prepareScreen.quizz_page(quizz);
+    },
+    sucessToHome: function (response){
+        document.querySelector('.quizz.create.sucess').classList.toggle('hidden-section');
+        prepareScreen.home(response);
     }
 }
 
 const prepareScreen = {
+    home: function(response){
+        printHomeScreen(response);
+    },
+    quizz_page: function(quizz){
+        printQuizz(quizz, false);
+    },
     questions: function(){
         let HTMLtoAdd = ``;
         let parent = document.querySelector('.quizz.create.questions');
@@ -360,10 +375,13 @@ const prepareScreen = {
     levels: function(){
         soPraTestarApagar();
     },
-    sucess: function(title, imgURL){
+    sucess: function(id, title, imgURL){
         let parent = document.querySelector('.quizz.create.sucess');
+        let container_html = parent.querySelector('.img-container');
         let img_html = parent.querySelector('img'); 
         let title_html = parent.querySelector('.quizz-title'); 
+
+        container_html.setAttribute("onclick",`conexion.getQuizz(${id})`);
         img_html.src = imgURL;
         title_html.innerText = title;
     },
@@ -377,6 +395,12 @@ const prepareScreen = {
 
 
 const conexion = {
+    getQuizzes: function (){
+        axios.get(`https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes`)
+        .then( response => {
+            screenTransition.sucessToHome(response);
+        });
+    },
     sendMadeQuizz: function (){
         axios.post('https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes', quizz)
         .then( response => {
@@ -399,9 +423,12 @@ const conexion = {
     getQuizz: function(quizzID) {
         axios.get(`https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes/${quizzID}`)
         .then( response => {
-            //printQuizz
+            screenTransition.sucessToNewQuizz(response);
         });
     }
+
+
+
 
 }
 
@@ -556,7 +583,7 @@ function playQuizz(quizzID) {
   
 }
 
-function printQuizz(quizz){
+function printQuizz(quizz, switchPageFlag = true){
     const title = playQuizzScreen.querySelector(".quizz-title");
     title.innerText = quizz.data.title;
     const banner = playQuizzScreen.querySelector(".banner-image");
@@ -597,7 +624,8 @@ function printQuizz(quizz){
         }
     } 
     clearQuizz();
-    switchPage("quizz-page");
+    if(switchPageFlag)
+        switchPage("quizz-page");
 
 }
 
