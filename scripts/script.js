@@ -360,9 +360,12 @@ const prepareScreen = {
     levels: function(){
         soPraTestarApagar();
     },
-    sucess: function(imgURL){
+    sucess: function(title, imgURL){
         let parent = document.querySelector('.quizz.create.sucess');
-        
+        let img_html = parent.querySelector('img'); 
+        let title_html = parent.querySelector('.quizz-title'); 
+        img_html.src = imgURL;
+        title_html.innerText = title;
     },
     showNewQuestion: function(t){
         t.parentElement.classList.toggle('empty');
@@ -377,19 +380,29 @@ const conexion = {
     sendMadeQuizz: function (){
         axios.post('https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes', quizz)
         .then( response => {
-  
+            let d = response.data;
             quizz = {...emptyQuizz};
             console.log(response);
-            prepareScreen.sucess(response.data.image);
+            prepareScreen.sucess(d.title, d.image);
             //modificação para obter ID e Key
             dataUserQuizz.id.push(response.data.id); 
             dataUserQuizz.key.push(response.data.key);
             uploadUserQuizzId();
+         
+
+  
         })
         .catch( error => {
             console.log(error);
         });
+    },
+    getQuizz: function(quizzID) {
+        axios.get(`https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes/${quizzID}`)
+        .then( response => {
+            //printQuizz
+        });
     }
+
 }
 
 function login(){
@@ -611,8 +624,6 @@ function clearQuizz() {
 }
 
 function switchPage(pageTo) {
-    newQuizzScreen.classList.add("hidden-section");
-    playQuizzScreen.classList.add("hidden-section");
     homeScreen.classList.add("hidden-section");
     if (pageTo === "quizz-list") {
         getServerQuizzes();
