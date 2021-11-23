@@ -536,7 +536,7 @@ function soPraTestarApagar(){
 //tela 1
 const url_quizzes = `https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes`;
 const homeScreen = document.querySelector(".quizz-list");
-let activeUserQuizzes =[];
+let activeUserQuizzes;
 
 function getServerQuizzes() {
     const promise = axios.get(url_quizzes);
@@ -549,11 +549,11 @@ function printHomeScreen(answer) {
     checkUserQuizzes(answer.data);
 }
 
-function printHomeScreenThumbs(quizzes,locationClass,userKeys) {
+function printHomeScreenThumbs(quizzes,locationClass/*,userKeys*/) {
     let text = "";
     let buttonsString = "";    
     for(i = 0; i < quizzes.length; i++) {
-        if (locationClass === "yourquizzes-list"){
+       /* if (locationClass === "yourquizzes-list"){
             buttonsString = `
             <button class="your-quizzes-options edit-option" onclick="editUserQuizz(${quizzes[i].id},'${userKeys[i]}')">
                 
@@ -562,7 +562,7 @@ function printHomeScreenThumbs(quizzes,locationClass,userKeys) {
                
             </button>
             `;
-        }      
+        } */      
         text += thumbStructure(quizzes[i],buttonsString);
     }
     homeScreen.querySelector(`.${locationClass} ul`).innerHTML = text;
@@ -571,19 +571,13 @@ function printHomeScreenThumbs(quizzes,locationClass,userKeys) {
 function checkUserQuizzes(serverQuizzes) {
     console.log(serverQuizzes);
     const userIds = getUserQuizzes().ids;
+    userIds[0] =1469;
     console.log(userIds);
-    const userKeys = getUserQuizzes().keys;
 
+    const userKeys = getUserQuizzes().keys;   
+    userKeys[0] = "362067b1-7129-4dfe-92c0-ca1cf98e63d0";    
     
-    for(let i=0; i<userIds.length;i++){
-        for(let j=0; j<serverQuizzes.length;j++){
-            if(serverQuizzes[j].id == serverQuizzes[i]){
-                activeUserQuizzes.push(serverQuizzes[j].id);
-            }
-        }
-    }
-    
-    //activeUserQuizzes = serverQuizzes.filter(({id}) => userIds.includes(id));
+    activeUserQuizzes = serverQuizzes.filter(({id}) => userIds.includes(id));
 
     console.log(activeUserQuizzes);
     if (activeUserQuizzes.length == 0) {
