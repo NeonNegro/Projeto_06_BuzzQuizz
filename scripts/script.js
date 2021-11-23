@@ -23,6 +23,10 @@ let emptyQuizzLevel = {
     text: null,
     minValue: null
 }
+let dataUserQuizz = {
+    id: [],
+    key: []
+}
 
 const msgsErrors = {
     title : {msg : 'deve ter no mínimo 20 e no máximo 65 caracteres', field : '#title'},
@@ -404,6 +408,11 @@ const conexion = {
             quizz = {...emptyQuizz};
             console.log(response);
             prepareScreen.sucess(d.id, d.title, d.image);
+            //modificação para obter ID e Key
+            dataUserQuizz.id.push(response.data.id); 
+            dataUserQuizz.key.push(response.data.key);
+            uploadUserQuizzId();
+         
 
   
         })
@@ -552,7 +561,7 @@ function getUserQuizzes() {
 function thumbStructure(element,buttonsString) {
         return `<li class="quizz-thumb" onclick="playQuizz(${element.id})" data-identifier="quizz-card">
         <div class="thumb grad"></div>
-        <img src="${element.image}" alt="Test Image">
+        <img src="${element.image}" alt="thumbnail">
         <h2 class="quizz-thumb-title">${element.title}</h2>
         ${buttonsString}
         </li>`;
@@ -709,6 +718,14 @@ function showResults(questionsNumber){
     result.classList.remove("hidden");
     result.scrollIntoView();
 }
-
+//armazenando ID e Key
+function uploadUserQuizzId() {
+    const userInfo = getUserQuizzes();
+    userInfo.ids.push(dataUserQuizz.id);
+    userInfo.keys.push(dataUserQuizz.key);
+    console.log(userInfo);
+    localStorage.setItem("idBuzzQuizzArray",JSON.stringify(userInfo));
+    return 1;
+}
 
 getServerQuizzes();
