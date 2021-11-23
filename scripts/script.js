@@ -551,7 +551,7 @@ function printHomeScreen(answer) {
 
 function printHomeScreenThumbs(quizzes,locationClass/*,userKeys*/) {
     let text = "";
-    let buttonsString = "";    
+    //let buttonsString = "";    
     for(i = 0; i < quizzes.length; i++) {
        /* if (locationClass === "yourquizzes-list"){
             buttonsString = `
@@ -563,7 +563,7 @@ function printHomeScreenThumbs(quizzes,locationClass/*,userKeys*/) {
             </button>
             `;
         } */      
-        text += thumbStructure(quizzes[i],buttonsString);
+        text += thumbStructure(quizzes[i]/*,buttonsString*/);
     }
     homeScreen.querySelector(`.${locationClass} ul`).innerHTML = text;
 }
@@ -579,7 +579,7 @@ function checkUserQuizzes(serverQuizzes) {
     
     activeUserQuizzes = serverQuizzes.filter(({id}) => userIds.includes(id));
     console.log(activeUserQuizzes);
-    
+
     if (activeUserQuizzes.length == 0) {
         homeScreen.querySelector(".emptyquizz-list").classList.remove("hidden");
         homeScreen.querySelector(".yourquizzes-list").classList.add("hidden");
@@ -597,7 +597,7 @@ function thumbStructure(element,buttonsString) {
         <div class="thumb grad"></div>
         <img src="${element.image}" alt="thumbnail">
         <h2 class="quizz-thumb-title">${element.title}</h2>
-        ${buttonsString}
+        
         </li>`;
 }
 

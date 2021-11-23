@@ -563,16 +563,18 @@ section.hidden-section{
         height: 52px;
         margin: 34px auto 12px;
         font-size: 18px;
+        border: none;
     }
 
     .quizz-page .home-button {
         font-size: 18px;
+        border: none;
     }
 
 
 
 
-    
+
     .quizz.create h2{
         font-size: 20px;
         margin-top: 23px;
