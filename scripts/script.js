@@ -547,16 +547,7 @@ function checkUserQuizzes(serverQuizzes) {
     }
 }
 
-function getUserQuizzes() {
-    let userInfo;
-    if (localStorage.getItem("idBuzzQuizzArray")){
-        userInfo = JSON.parse(localStorage.getItem("idBuzzQuizzArray"))
-    } else {
-        userInfo = {ids:[],keys:[]}
-        localStorage.setItem("idBuzzQuizzArray",JSON.stringify(userInfo));
-    }
-    return userInfo
-}
+
 
 function thumbStructure(element,buttonsString) {
         return `<li class="quizz-thumb" onclick="playQuizz(${element.id})" data-identifier="quizz-card">
@@ -720,13 +711,23 @@ function showResults(questionsNumber){
     result.scrollIntoView();
 }
 //armazenando ID e Key
+function getUserQuizzes() {
+    let userInfo;
+    if (localStorage.getItem("idBuzzQuizzArray")){
+        userInfo = JSON.parse(localStorage.getItem("idBuzzQuizzArray"))
+    } else {
+        userInfo = {ids:[],keys:[]}
+        localStorage.setItem("idBuzzQuizzArray",JSON.stringify(userInfo));
+    }
+    return userInfo
+}
+
 function uploadUserQuizzId() {
     const userInfo = getUserQuizzes();
     userInfo.ids.push(dataUserQuizz.id);
     userInfo.keys.push(dataUserQuizz.key);
     console.log(userInfo);
-    localStorage.setItem("idBuzzQuizzArray",JSON.stringify(userInfo));
-    return 1;
+    localStorage.setItem("idBuzzQuizzArray",JSON.stringify(userInfo));    
 }
 
 getServerQuizzes();
