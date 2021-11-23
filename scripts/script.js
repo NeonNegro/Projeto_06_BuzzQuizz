@@ -415,8 +415,6 @@ const conexion = {
             dataUserQuizz.id.push(response.data.id); 
             dataUserQuizz.key.push(response.data.key);
             uploadUserQuizzId();
-         
-
   
         })
         .catch( error => {
@@ -504,7 +502,7 @@ function soPraTestarApagar(){
 //tela 1
 const url_quizzes = `https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes`;
 const homeScreen = document.querySelector(".quizz-list");
-let activeUserQuizzes;
+let activeUserQuizzes =[];
 
 function getServerQuizzes() {
     const promise = axios.get(url_quizzes);
@@ -537,10 +535,24 @@ function printHomeScreenThumbs(quizzes,locationClass,userKeys) {
 }
 
 function checkUserQuizzes(serverQuizzes) {
+    console.log(serverQuizzes);
     const userIds = getUserQuizzes().ids;
+    console.log(userIds);
     const userKeys = getUserQuizzes().keys;
-    activeUserQuizzes = serverQuizzes.filter(({id}) => userIds.includes(id))
-    if (activeUserQuizzes.length === 0) {
+
+    
+    for(let i=0; i<userIds.length;i++){
+        for(let j=0; j<serverQuizzes.length;j++){
+            if(serverQuizzes[j].id == serverQuizzes[i]){
+                activeUserQuizzes.push(serverQuizzes[j].id);
+            }
+        }
+    }
+    
+    //activeUserQuizzes = serverQuizzes.filter(({id}) => userIds.includes(id));
+
+    console.log(activeUserQuizzes);
+    if (activeUserQuizzes.length == 0) {
         homeScreen.querySelector(".emptyquizz-list").classList.remove("hidden");
         homeScreen.querySelector(".yourquizzes-list").classList.add("hidden");
     } else {
