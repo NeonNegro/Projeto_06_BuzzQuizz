@@ -66,17 +66,13 @@
     <section class="quizz create basic hidden-section">
         <h2>Comece pelo começo</h2>
         <div class="container">
-            <!-- <input id ='title' type="text" placeholder="Título do seu quizz">  -->
-            <input id ='title' type="text" placeholder="Título do seu quizz" value='https://trello.com/b/TmeKrp4E/buzzquizzscreenTransition'> 
+            <input id ='title' type="text" placeholder="Título do seu quizz"> 
             <span></span>
-            <!-- <input id ='url' type="text" placeholder="URL da imagem do seu quizz"> -->
-            <input id ='url' type="text" placeholder="URL da imagem do seu quizz" value='http://i1.ytimg.com/vi/jHWKtQHXVJg/maxresdefault.jpg?feature=og'>
+            <input id ='url' type="text" placeholder="URL da imagem do seu quizz">
             <span></span>
-            <!-- <input id ='qtd_questions' type="text" placeholder="Quantidade de perguntas do quizz"> -->
-            <input id ='qtd_questions' type="text" placeholder="Quantidade de perguntas do quizz" value='4'>
+            <input id ='qtd_questions' type="text" placeholder="Quantidade de perguntas do quizz">
             <span></span>
-            <!-- <input id='qtd_levels' type="text" placeholder="Quantidade de níveis do quizz"> -->
-            <input id='qtd_levels' type="text" placeholder="Quantidade de níveis do quizz" value='4'>
+            <input id='qtd_levels' type="text" placeholder="Quantidade de níveis do quizz">
             <span></span>
         </div>
 
@@ -87,8 +83,8 @@
         <h2>Crie suas perguntas</h2>
         <div class="container">
             <h3> Pergunta 1 </h3>
-            <img onclick="prepareScreen.showNewQuestion(this)" src="imgs/new.png" alt="">
-            <div class="container-in">
+            <img onclick="prepareScreen.showNewQuestion(this)" src="imgs/new.png" data-identifier="expand" alt="">
+            <div class="container-in" data-identifier="question">
                 <input id ='question-1' type="text" placeholder="Texto da Pergunta">
                 <span></span>
                 <input id ='color-1' type="text" placeholder="Cor de fundo da pergunta">
@@ -121,8 +117,8 @@
         <div class="container">
             <h3> Nível 1 </h3>
             <span id='min-levels'></span>
-            <img onclick="prepareScreen.showNewLevel(this)" src="imgs/new.png" alt="">
-            <div class="container-in">
+            <img onclick="prepareScreen.showNewLevel(this)" src="imgs/new.png" alt="" data-identifier="expand">
+            <div class="container-in" data-identifier="level">
                 <input id ='level-title-1' type="text" placeholder="Título do nível">
                 <span></span>
                 <input id ='level-percent-1' type="text" placeholder="% de acerto mímina">
@@ -135,8 +131,8 @@
         </div>
         <div class="container empty">
             <h3> Nível 2 </h3>
-            <img onclick="prepareScreen.showNewLevel(this)" src="imgs/new.png" alt="">
-            <div class="container-in">
+            <img onclick="prepareScreen.showNewLevel(this)" src="imgs/new.png" alt="" data-identifier="expand"> 
+            <div class="container-in" data-identifier="level">
                 <input id ='level-title-2' type="text" placeholder="Título do nível">
                 <span></span>
                 <input id ='level-percent-2' type="text" placeholder="% de acerto mímina">
@@ -149,8 +145,8 @@
         </div>
         <div class="container empty">
             <h3> Nível 3 </h3>
-            <img onclick="prepareScreen.showNewLevel(this)" src="imgs/new.png" alt="">
-            <div class="container-in">
+            <img onclick="prepareScreen.showNewLevel(this)" src="imgs/new.png" alt="" data-identifier="expand">
+            <div class="container-in" data-identifier="level">
                 <input id ='level-title-3' type="text" placeholder="Título do nível">
                 <span></span>
                 <input id ='level-percent-3' type="text" placeholder="% de acerto mímina">

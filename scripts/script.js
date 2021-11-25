@@ -362,9 +362,9 @@ const prepareScreen = {
         let parent = document.querySelector('.quizz.create.questions');
         for(let i = 2; i <= qtd_questions; i++){
             HTMLtoAdd += ` 
-            <div class="container empty">
+            <div class="container empty" data-identifier="question">
                 <h3> Pergunta ${i} </h3>
-                <img onclick="prepareScreen.showNewQuestion(this)" src="imgs/new.png" alt="">
+                <img onclick="prepareScreen.showNewQuestion(this)" src="imgs/new.png" alt="" data-identifier="expand">
                 <div class="container-in">
                     <input id ='question-${i}' type="text" placeholder="Texto da Pergunta">
                     <span></span>
@@ -396,10 +396,8 @@ const prepareScreen = {
         }
         parent.innerHTML += HTMLtoAdd;
         parent.innerHTML += `<button onclick="validate.questions()">Prosseguir pra criar níveis</button>`;
-        soPraTestarApagar();
     },
     levels: function(){
-        soPraTestarApagar();
     },
     sucess: function(id, title, imgURL){
         let parent = document.querySelector('.quizz.create.sucess');
@@ -471,68 +469,6 @@ function login(){
     user = document.querySelector(".user-name").value;
     
 }
-
-function soPraTestarApagar(){
-    if(true)return;
-    let tela;
-    let inputs= [];
-    let input;
-    if(!document.querySelector('.quizz.create.questions').classList.contains('hidden-section')){
-        tela = document.querySelector('.quizz.create.questions');
-        inputs = tela.querySelectorAll('[id*="question"]');
-        inputs.forEach(e => {
-            e.value = 'abluablualbualbualbualbualbualbualbualbualub'
-        });
-        inputs = tela.querySelectorAll('[id*="color"]');
-        inputs.forEach(e => {
-            e.value = '#111111'
-        });
-        inputs = tela.querySelectorAll('[id*="answer-"]');
-        inputs.forEach(e => {
-            e.value = 'abrobinha'
-        });
-        inputs = tela.querySelectorAll('[id*="img-"]');
-        inputs.forEach(e => {
-            e.value = 'http://i1.ytimg.com/vi/jHWKtQHXVJg/maxresdefault.jpg?feature=og'
-        });
-        inputs = tela.querySelectorAll('[id*="incorrect-"][id$="1"]');
-        inputs.forEach(e => {
-            e.value = 'batatinha'
-        });
-        inputs = tela.querySelectorAll('[id*="incorrectUrl-"][id$="1"]');
-        inputs.forEach(e => {
-            e.value = 'http://i1.ytimg.com/vi/jHWKtQHXVJg/maxresdefault.jpg?feature=og'
-        });
-    }
-    if(!document.querySelector('.quizz.create.levels').classList.contains('hidden-section')){
-        tela = document.querySelector('.quizz.create.levels');
-        input = tela.querySelector('#level-title-1');
-        input.value = 'asiodaiosdhaiusdhaiusdhiausdhiausdhaiusdhiausdhaisud'
-        input = tela.querySelector('#level-title-2');
-        input.value = 'asiodaiosdhaiusdhaiusdhiausdhiausdhaiusdhiausdhaisud'
-        input = tela.querySelector('#level-percent-1');
-        input.value = '0';
-        input = tela.querySelector('#level-percent-2');
-        input.value = '50';
-        input = tela.querySelector('#level-img-1');
-        input.value = 'http://i1.ytimg.com/vi/jHWKtQHXVJg/maxresdefault.jpg?feature=og';
-        input = tela.querySelector('#level-img-2');
-        input.value = 'http://i1.ytimg.com/vi/jHWKtQHXVJg/maxresdefault.jpg?feature=og';
-        input = tela.querySelector('#level-description-1');
-        input.value = 'asiodaiosdhaiusdhaiusdhiausdhiausdhaiusdhiausdhaisud';
-        input = tela.querySelector('#level-description-2');
-        input.value = 'asiodaiosdhaiusdhaiusdhiausdhiausdhaiusdhiausdhaisud';
-        // <input id='level-description-1' type="text" placeholder="Descrição do nível">
-    }
-}
-
-
-
-
-
-
-
-
 
 
 //tela 1
