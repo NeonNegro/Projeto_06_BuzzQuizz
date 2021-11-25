@@ -445,8 +445,6 @@ const conexion = {
             dataUserQuizz.id.push(response.data.id); 
             dataUserQuizz.key.push(response.data.key);
             uploadUserQuizzId();
-         
-
   
         })
         .catch( error => {
@@ -487,11 +485,11 @@ function printHomeScreen(answer) {
     checkUserQuizzes(answer.data);
 }
 
-function printHomeScreenThumbs(quizzes,locationClass,userKeys) {
+function printHomeScreenThumbs(quizzes,locationClass/*,userKeys*/) {
     let text = "";
-    let buttonsString = "";    
+    //let buttonsString = "";    
     for(i = 0; i < quizzes.length; i++) {
-        if (locationClass === "yourquizzes-list"){
+       /* if (locationClass === "yourquizzes-list"){
             buttonsString = `
             <button class="your-quizzes-options edit-option" onclick="editUserQuizz(${quizzes[i].id},'${userKeys[i]}')">
                 
@@ -500,43 +498,42 @@ function printHomeScreenThumbs(quizzes,locationClass,userKeys) {
                
             </button>
             `;
-        }      
-        text += thumbStructure(quizzes[i],buttonsString);
+        } */      
+        text += thumbStructure(quizzes[i]/*,buttonsString*/);
     }
     homeScreen.querySelector(`.${locationClass} ul`).innerHTML = text;
 }
 
 function checkUserQuizzes(serverQuizzes) {
+    console.log(serverQuizzes);
     const userIds = getUserQuizzes().ids;
-    const userKeys = getUserQuizzes().keys;
-    activeUserQuizzes = serverQuizzes.filter(({id}) => userIds.includes(id))
-    if (activeUserQuizzes.length === 0) {
+    //userIds[0] =1469;
+    console.log(userIds);
+
+   /* const userKeys = getUserQuizzes().keys;   
+    userKeys[0] = "362067b1-7129-4dfe-92c0-ca1cf98e63d0"; */    
+    
+    activeUserQuizzes = serverQuizzes.filter(({id}) => userIds.includes(id));
+    console.log(activeUserQuizzes);
+
+    if (activeUserQuizzes.length == 0) {
         homeScreen.querySelector(".emptyquizz-list").classList.remove("hidden");
         homeScreen.querySelector(".yourquizzes-list").classList.add("hidden");
     } else {
         homeScreen.querySelector(".emptyquizz-list").classList.add("hidden");
         homeScreen.querySelector(".yourquizzes-list").classList.remove("hidden");
-        printHomeScreenThumbs(activeUserQuizzes,"yourquizzes-list",userKeys);
+        printHomeScreenThumbs(activeUserQuizzes,"yourquizzes-list" /*,userKeys*/);
     }
 }
 
-function getUserQuizzes() {
-    let userInfo;
-    if (localStorage.getItem("idBuzzQuizzArray")){
-        userInfo = JSON.parse(localStorage.getItem("idBuzzQuizzArray"))
-    } else {
-        userInfo = {ids:[],keys:[]}
-        localStorage.setItem("idBuzzQuizzArray",JSON.stringify(userInfo));
-    }
-    return userInfo
-}
+
 
 function thumbStructure(element,buttonsString) {
         return `<li class="quizz-thumb" onclick="playQuizz(${element.id})" data-identifier="quizz-card">
         <div class="thumb grad"></div>
         <img src="${element.image}" alt="thumbnail">
         <h2 class="quizz-thumb-title">${element.title}</h2>
-        ${buttonsString}
+        
         </li>`;
 }
 
@@ -693,13 +690,23 @@ function showResults(questionsNumber){
     result.scrollIntoView();
 }
 //armazenando ID e Key
+function getUserQuizzes() {
+    let userInfo;
+    if (localStorage.getItem("idBuzzQuizzArray")){
+        userInfo = JSON.parse(localStorage.getItem("idBuzzQuizzArray"))
+    } else {
+        userInfo = {ids:[],keys:[]}
+        localStorage.setItem("idBuzzQuizzArray",JSON.stringify(userInfo));
+    }
+    return userInfo
+}
+
 function uploadUserQuizzId() {
     const userInfo = getUserQuizzes();
     userInfo.ids.push(dataUserQuizz.id);
     userInfo.keys.push(dataUserQuizz.key);
     console.log(userInfo);
-    localStorage.setItem("idBuzzQuizzArray",JSON.stringify(userInfo));
-    return 1;
+    localStorage.setItem("idBuzzQuizzArray",JSON.stringify(userInfo));    
 }
 
 getServerQuizzes();
